@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    function Person(name, age) {
+      this.strength = 60;
+      this.age = age;
+      return 'wuxuwwi'
+    }
+
+    Person.prototype.strength = 60;
+    function objectFactory() {
+      var obj = {};
+      Constructor = [].shift.call(arguments)
+
+      obj.__proto__ = Constructor.prototype;
+
+      var ret = Constructor.apply(obj, arguments);
+
+      return typeof ret === 'object' ? ret : obj;
+
+    }
+
+    var person1 = objectFactory(Person, 'wuxuwei', 18);
+    console.log(person1)
+    console.log(person1.strength)
+  </script>
+</body>
+
+</html>

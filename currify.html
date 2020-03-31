@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>currify</title>
+</head>
+
+<body>
+  <script>
+    var addTwo = (a, b) => a + b;
+
+    var currify = (fn, params = []) => {
+      return (arg) => {
+        const newParams = params.concat(arg)
+        if (newParams.length === fn.length) {
+          return fn(...newParams)
+        } else {
+          return currify(fn, newParams)
+        }
+      }
+    }
+    var a = currify(addTwo)
+    console.log(a(1)(2))
+
+  </script>
+</body>
+
+</html>

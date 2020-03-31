@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>call</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    var value = 'window';
+    const obj = {
+      value: 'inner'
+    }
+    function foo(name, age) {
+      console.log(name, age)
+      console.log(this.value)
+      return {
+        name,
+        age,
+      }
+    }
+
+
+
+    Function.prototype.apply2 = function (context, arr) {
+      var context = context || window;
+      context.foo = this;
+      console.log('arr')
+      console.log(arr)
+      var args = [];
+      for (var i = 0; i < arr.length; i++) {
+        args.push(arr[i])
+      }
+      return context.foo(...args)
+      delete context.foo
+    }
+
+
+    Function.prototype.apply2 = function (context, arr) {
+      context = context || window;
+      context.fn = this;
+      var args = [];
+      for (var i = 0; i < arguments.length; i++) {
+        args.push(arr[i]);
+      }
+      var result = context.fn(...args);
+      delete context.fn;
+      return result;
+    }
+
+    console.log(foo.apply2(null, ['wuxuwei', 18]))
+
+  </script>
+</body>
+
+</html>
