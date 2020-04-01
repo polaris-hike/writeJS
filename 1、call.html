@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>call</title>
 </head>
 
 <body>
@@ -28,7 +28,7 @@
     }
 
     Function.prototype.call2 = function (context) {
-      var context = context | window;
+      context = context | window;
       context.foo = this;
       const args = []
       for (let i = 1; i < arguments.length; i++) {
@@ -38,35 +38,22 @@
       delete context.foo;
       return result
     }
-    foo.call(obj, 'wuxuwei');
-
-    Function.prototype.call2 = function (context) {
-      context = context || window;
-      context.fn = this;
-      var args = [];
-      for (var i = 1; i < arguments.length; i++) {
-        args.push(arguments[i]);
-      }
-      var result = context.fn(...args);
-      delete context.fn;
-      return result
-    }
+    //foo.call(obj, 'wuxuwei');
 
     Function.prototype.apply2 = function (context, arr) {
       context = context || window;
       context.fn = this;
       var args = [];
       for (var i = 0; i < arr.length; i++) {
-        args.push(arr[i]);
+        args.push(arr[i])
       }
       var result = context.fn(...args);
       delete context.fn;
-      return result
+      return result;
     }
 
 
-
-    console.log(foo.call2(null, 'wuxuwei', 18)) 
+    console.log(foo.apply2(obj, ['wuxuwei', 18])) 
   </script>
 </body>
 

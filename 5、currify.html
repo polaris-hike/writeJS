@@ -9,7 +9,7 @@
 
 <body>
   <script>
-    var addTwo = (a, b) => a + b;
+    var addTwo = (a, b, c) => a + b + c;
 
     var currify = (fn, params = []) => {
       return (arg) => {
@@ -21,8 +21,10 @@
         }
       }
     }
+
+
     var a = currify(addTwo)
-    console.log(a(1)(2))
+    console.log(a(1)(2)(3))
 
   </script>
 </body>
