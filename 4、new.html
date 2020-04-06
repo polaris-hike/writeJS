@@ -33,6 +33,14 @@
     }
 
 
+    function new2() {
+      var obj = new Object();
+      Constructor = Array.prototype.shift.call(arguments);
+      obj.__proto__ = Constructor.prototype;
+      var ret = Constructor.apply(obj, arguments);
+      return typeof ret === 'object' ? ret : obj;
+    }
+
 
     // 第二版 解决构造函数有返回值的问题;
     // 1.构造函数的返回值如果是对象,那么实例就只能取到返回对象中属性,其余的为 undefined.

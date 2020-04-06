@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>extend</title>
+</head>
+
+<body>
+
+
+  <script>
+    var obj1 = {
+      a: 1,
+      b: { b1: 1, b2: 2 }
+    };
+
+    var obj2 = {
+      b: { b1: 3, b3: 4 },
+      c: 3
+    };
+
+    var obj3 = {
+      d: 4
+    }
+    function extend() {
+      var name, options, copy;
+      var length = arguments.length;
+      var target = arguments[0];
+      for (var i = 1; i < length; i++) {
+        options = arguments[i];
+        if (options != null) {
+          for (name in options) {
+            copy = options[name];
+            if (copy !== undefined) {
+              target[name] = copy
+            }
+          }
+        }
+      }
+      return target
+    }
+    console.log(extend(obj1, obj2, obj3));
+  </script>
+</body>
+
+</html>

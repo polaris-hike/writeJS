@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>test</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    Function.prototype.call2 = function (context) {
+      context = context || window;
+      context.fn = this;
+      var args = Array.prototype.slice.call(arguments, 1);
+      var result = context.fn(...args);
+      delete result.fn;
+      return result;
+    }
+
+    function new1(fn) {
+      var obj = new Object;
+      Constructor = Array.prototype.shift.call(arguments);
+      obj.__proto__ = Constructor.prototype;
+      var result = Constructor.apply(obj, arguments);
+      return typeof result === 'object' ? result : obj;
+    }
+
+    function currify(fn, params = []) {
+      return function (arg) {
+        const newParams = params.concat(arg)
+        if (newParams.length === fn.length) {
+          return fn(...newParams)
+        } else {
+          return currify(fn, newParams)
+        }
+      }
+    }
+
+    function debounce(fn, wait) {
+      var timeout;
+      return function () {
+        var args = arguments;
+        var self = this;
+        clearTimeout(timeout);
+        timeout = setTimeout(function () {
+          fn.apply(self, args)
+        }, wait)
+      }
+    }
+
+    function throttle(fn, wait) {
+      var self, args, now;
+      var previous = 0
+      return function () {
+        now = +new date();
+        self = this;
+        args = arguments;
+        if (now - previous > wait) {
+          fn.apply(self, now);
+          previous = now;
+        }
+
+      }
+    }
+
+  </script>
+</body>
+
+</html>

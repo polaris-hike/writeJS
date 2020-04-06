@@ -31,9 +31,21 @@
       container.innerHTML = count++;
     };
 
-    container.onmousemove = debounce(getUserAction, 1000);
+    container.onmousemove = debouce2(getUserAction, 1000, true);
     //container.onmousemove = getUserAction;
 
+
+    function debouce(fn, wait) {
+      var timeout;
+      return function () {
+        clearTimeout(timeout);
+        var self = this;
+        var args = arguments;
+        timeout = setTimeout(function () {
+          fn.apply(self, args);
+        }, wait)
+      }
+    }
 
     // 第一版 
     function debounce(func, wait) {
@@ -56,25 +68,47 @@
       }
     }
     // 第三版 增加立即执行功能
-    function debouce(fn, wait, immediate) {
+    function debouce2(fn, wait, immediate) {
       var timeout;
       return function () {
         var context = this;
         var args = arguments;
+        timeout && clearTimeout(timeout);
+        if (immediate) {
 
-        if (timeout) clearTimeout(timeout);
+          var callNow = !timeout;
+
+          timeout = setTimeout(function () {
+            timeout = null;
+          }, wait)
+          callNow && fn.apply(context, args);
+        } else {
+          timeout = setTimeout(function () {
+            fn.apply(context, args)
+          }, wait)
+        }
+
+      }
+    }
+
+
+    function debouce4(fn, wait, immediate) {
+      var timeout
+      return function () {
+        var self = this;
+        var args = arguments;
+        timeout && clearTimeout(timeout)
         if (immediate) {
           var callNow = !timeout;
           timeout = setTimeout(function () {
             timeout = null;
           }, wait)
-          if (callNow) func.apply(context, args);
+          callNow && fn.apply(self, wait)
         } else {
-          timeout = setTimeout(function () {
-            func.apply(conetxt, args)
-          }, args)
+          setTimeout(function () {
+            fn.apply(self, args)
+          }, wait)
         }
-
       }
     }
 

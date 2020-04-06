@@ -9,6 +9,45 @@
 
 <body>
 
+
+
+  <script>
+    // 浅拷贝
+    function shallowCopy(obj) {
+      if (typeof obj !== 'object') return;
+      var newObj = obj instanceof Array ? [] : {};
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = obj[key]
+        }
+      }
+      return newObj
+    }
+
+    // 深拷贝
+    function deepClone(obj) {
+      if (typeof obj !== 'object') return
+      var newObj = obj instanceof Array ? [] : obj;
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]
+        }
+      }
+      return newObj
+    }
+
+    function deepClone(obj) {
+      if (typeof obj !== 'object') return;
+      var newObj = obj instanceof Array ? [] : {};
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = typeof obj[key] === 'object' ? deepClone(obj[key]) : obj[key]
+        }
+      }
+      return newObj
+    }
+
+  </script>
 </body>
 
 </html>

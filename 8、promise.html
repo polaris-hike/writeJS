@@ -8,7 +8,51 @@
 </head>
 
 <body>
+  <div>
+    <button id=a>A</button>
+    <button id=b>B</button>
+    <input type="text" id=myInput>
+  </div>
 
+  <script>
+
+
+
+    var ajax1 = function () {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('A')
+        }, 5000)
+      })
+    }
+
+    var ajax2 = function () {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('B')
+        }, 3000)
+      })
+    }
+
+    a.onclick = function () {
+      console.log(1)
+      ajax1().then(res => {
+        myInput.value = res
+        console.log(res)
+      })
+    }
+
+
+
+    b.onclick = function () {
+      ajax2().then(res => {
+        myInput.value = res
+        console.log(res)
+      })
+    }
+
+
+  </script>
 </body>
 
 </html>
