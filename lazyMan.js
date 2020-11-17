@@ -1,10 +1,9 @@
-var taskList = []
+var taskList = [];
+
 
 // 订阅
 function subscribe(name, arg) {
-  const params = {
-    name, arg
-  }
+  var params = { name, arg };
   if (name === 'sleepFirst') {
     taskList.unshift(params)
   } else {
@@ -22,72 +21,60 @@ function publish() {
 function run({ name, arg }) {
   switch (name) {
     case 'lazyMan': lazyMan(arg); break;
-    case 'eat': eat(arg); break;
     case 'sleep': sleep(arg); break;
+    case 'eat': eat(arg); break;
     case 'sleepFirst': sleepFirst(arg); break;
   }
 }
-
-
-
-
-// 输出文字
-function lazyManLog(str) {
-  console.log(str);
-}
-
-// 具体方法
 function lazyMan(str) {
-  lazyManLog("Hi!This is " + str + "!");
-  publish()
-}
-function eat(str) {
-  lazyManLog("Eat" + str + "~");
+  console.log(`Hi! This is ${str}!`)
   publish()
 }
 function sleep(time) {
   setTimeout(() => {
-    lazyManLog("Wake up after " + time + "!");
+    console.log(`Wake up after ${time}!`)
     publish()
   }, time * 1000)
-
 }
-function sleepFirst(str) {
+
+function eat(str) {
+  console.log(`Eat ${str}!`)
+  publish()
+}
+function sleepFirst(time) {
   setTimeout(() => {
-    lazyManLog("Wake up after " + time + "!");
+    console.log(`Wake up after ${time}!`)
     publish()
   }, time * 1000)
-
 }
-LazyMan = function (str) {
-  subscribe('lazyMan', 'wuxuwei')
+
+function lazyManFn() { }
+lazyManFn.prototype.sleep = function (str) {
+  subscribe('sleep', str)
+  return this
+}
+lazyManFn.prototype.eat = function (time) {
+  subscribe('eat', time)
+  return this
+}
+lazyManFn.prototype.sleepFirst = function (time) {
+  subscribe('sleepFirst', time)
+  return this
+}
+
+function LazyMan(str) {
+  subscribe('lazyMan', str)
   setTimeout(() => {
     publish()
   })
-  return LazyMan.prototype
-}
-// 类
-function lazyManFn() { }
-LazyMan.prototype.eat = function (str) {
-  subscribe('eat', str)
-  return this
-}
-LazyMan.prototype.sleep = function (time) {
-  subscribe('sleep', time)
-  return this
-}
-LazyMan.prototype.sleepFirst = function (time) {
-  subscribe('sleepFirst ', time)
-  return this
+  return new lazyManFn()
 }
 
-LazyMan('xxx').sleep(3).eat('dinner')
 
 
 
 
-
-
+LazyMan("Hank").sleepFirst(5).eat("supper")
 
 
 
