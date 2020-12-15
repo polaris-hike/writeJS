@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function defineReactive(data, key, value) {
+      Object.defineProperty(data, key, {
+        enumerable: true,
+        configurable: true,
+        get: function defineGet() {
+          console.log(`get key:${key} value:${value}`)
+          return value
+        },
+        set: function defineSet(newVal) {
+          console.log(`set key:${key} value:${newVal}`)
+          value = newVal
+        }
+      })
+    }
+
+    function observe(data) {
+      Object.keys(data).forEach(function (key) {
+        defineReactive(data, key, data[key])
+      })
+    }
+    var a = [1, 2, 3, 54, 6]
+    observe(a)
+  </script>
+</body>
+
+</html>
