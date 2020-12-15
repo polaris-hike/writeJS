@@ -29,14 +29,42 @@
         defineReactive(data, key, data[key])
       })
     }
-    var a = [1, 2, 3, 54, 6]
+    var a = {
+      name: 'wuxuwei',
+      age: 18,
+      x: {
+        sex: 'w'
+      }
+    }
     observe(a)
-      // vue 对数组方法进行了重写
+
+    // vue 对数组方法进行了重写
     // 1.获取到数组本身的方法 (push,pop,shift,unshift,splice )
     // 2.对这些方法进行重写
     // 3.获取到新增加的项
     // 4.遍历监听新增加的对象
     // 5.手动触发一次更新
+
+
+    // proxy 没有修改原对象 拦截对象或数组原始的方法。例如:push、pop、shift等等
+    // proxy 无法避免数组的频繁更新 不能进行深度嵌套数据
+
+    let data = ['yideng', 'niubi']
+    let p = new Proxy(data, {
+      get(target, key, receiver) {
+        console.log('get value:', key)
+        return Reflect.get(target, key, receiver)
+      },
+      set(target, key, value, receiver) {
+        console.log('set value:', key, value)
+        return Reflect.set(target, key, value, receiver)
+      }
+    })
+
+
+
+
+
   </script>
 </body>
 
