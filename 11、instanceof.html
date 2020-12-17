@@ -9,6 +9,25 @@
 
 <body>
 
+
+  <script>
+    function myInstanceof(left, right) {
+      const prototype = right.prototype;
+      left = left.__ptoto__;
+      while (true) {
+        if (!left) { return false };
+        if (left === prototype) { return true }
+        left = left.__ptoto__
+      }
+    }
+
+    var a = new Date()
+    myInstanceof(a, Date)
+    var b = []
+    myInstanceof(b, Array)
+    var c = {}
+    myInstanceof(c, Object)
+  </script>
 </body>
 
 </html>
