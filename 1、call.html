@@ -50,7 +50,19 @@
       return result;
     }
 
-    console.log(foo.apply2(obj, ['wuxuwei', 18])) 
+
+
+
+    obj.fn()
+
+    console.log(foo.apply2(obj, ['wuxuwei', 18]))
+
+    context = context || window;
+    args = Array.prototype.slice(arguments, 1)
+    context.fn = this;
+    var result = context.fn(...args);
+    delete result.fn;
+    return resutl
   </script>
 </body>
 

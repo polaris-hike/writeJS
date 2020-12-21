@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>generator</title>
+</head>
+
+<body>
+
+  <script>
+    // generator 使用方法
+    function* test() {
+      let a = 1 + 2;
+      yield 2;
+      yield 3;
+    }
+    const b = test();
+    console.log(b.next()); // >  { value: 2, done: false }
+    console.log(b.next()); // >  { value: 3, done: false }
+    console.log(b.next()); // >  { value: undefined, done: true }
+
+    // 实现generator 
+    function generator(cb) {
+      return (function () {
+        var object = {
+          next: 0,
+          stop: function () { }
+        };
+
+        return {
+          next: function () {
+            var ret = cb(object);
+            if (ret === undefined) return { value: undefined, done: true };
+            return {
+              value: ret,
+              done: false
+            };
+          }
+        };
+      })();
+    }
+  </script>
+</body>
+
+</html>

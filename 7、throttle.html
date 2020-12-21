@@ -32,7 +32,7 @@
       container.innerHTML = count++;
     };
 
-    container.onmousemove = throttle(getUserAction, 1000);
+    container.onmousemove = throttle(getUserAction, 2000);
     function throttle(fn, wait) {
       var context, args;
       var previous = 0;
