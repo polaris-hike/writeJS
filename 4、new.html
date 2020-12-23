@@ -58,6 +58,16 @@
     console.log(person1.name)
     console.log(person1.strength)
     person1.sayName()
+
+
+
+
+    function myNew() {
+      var obj = Object.create()
+      const Con = [].shift.call(arguments)
+      obj.__proto__ = Con.prototype;
+      const result = Con.call(obj, ...arguments)
+    }
   </script>
 </body>
 
