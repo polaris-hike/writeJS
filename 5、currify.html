@@ -26,6 +26,23 @@
     var a = currify(addTwo)
     console.log(a(1)(2)(3))
 
+    function curry(fn,args = []) {
+      return function () {
+        const _args = args.slice(0)
+        for(let i =0;i<arguments.length;i++){
+          _args.push(arguments[i])
+        }
+        if(_args.length < fn.length){
+         return curry.call(this,fn,_args)
+        }else{
+         return fn.apply(this,_args)
+        }
+      }
+    }
+
+
+
+
   </script>
 </body>
 
