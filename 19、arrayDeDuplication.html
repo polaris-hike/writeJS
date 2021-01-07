@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>19、arrayDeDuplication</title>
+</head>
+
+<body>
+  <script>
+    var arr = [1, 2, 45, 3, 4, 2, 1, '1', '1']
+    // 1. Set
+    var result = [...new Set(arr)]
+    // 2. 循环 indexOf
+    var result = [];
+    for (let i of arr) {
+      if (result.indexOf(i) === -1) {
+        result.push(i)
+      }
+    }
+    // 3. filter
+    var result = arr.filter((item, index) => {
+      return arr.indexOf(item) === index
+    })
+  </script>
+</body>
+
+</html>
