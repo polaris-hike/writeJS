@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21、斐波拉契数列</title>
+</head>
+
+<body>
+<script>
+    // 1.粗暴递归
+    function fib(n) {
+        if(n === 0 )  return 0;
+        if(n === 1) return 1;
+        return fib(n-1) + fib (n-2)
+    }
+
+    // 递归使用缓存
+    function fib(n) {
+        const cache = [0,1,1]
+        function _fib(n) {
+          if(cache[n]) return cache[n]
+          cache[n] = _fib(n-1) + _fib(n-2)
+            return cache[n]
+        }
+        return _fib(n)
+
+    }
+    
+    
+    // 2.尾递归调用优化
+
+    function fib(n) {
+        return fib_inner(2,n,1,0)
+    }
+    function fib_inner(start,end,prev1,prev2) {
+        if(start === end) {
+          return prev1 + prev2
+        }else {
+          return fib_inner(start + 1,end,prev1 + prev2,prev1)
+        }
+    }
+
+    // 3. 循环
+    function fib(n) {
+        const arr = [0,1];
+        for(let i = 0;i <= n -2;i++) {
+          arr[i+2] = arr[i+1] + arr[i]
+        }
+        return arr[arr.length - 1]
+    }
+
+</script>
+</body>
+
+</html>
